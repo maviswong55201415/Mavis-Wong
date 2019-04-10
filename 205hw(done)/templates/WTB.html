@@ -1,0 +1,79 @@
+
+
+{% extends "base.html" %}
+
+{% block head %}
+<title>WTB</title>
+<link href="{{ url_for("static", filename = "css/home.css")}}" rel="stylesheet">
+<link href="{{ url_for("static", filename = "css/WTB.css")}}" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block main %}
+
+{% include "flashsender.html" %}
+
+{% if session['username'] %}
+<h1>Welcome, {{ session['username'] }}</h1>
+{% else %}
+<p>Please Login</p>
+{% endif %}
+
+{% for i in data %}
+  <div class="card">
+      <h1>{{i.Product_Name}}</h1>
+      <p class="price">$ {{i.Price}} </p>
+      <p>{{i.Discription}}</p>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{i.Product_Name|string}}">
+        Add to purchase list
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="{{i.Product_Name|string}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">My Cart</h5>
+            </div>
+            <div class="modal-body">
+              <form action="{{url_for('purchase')}}" method="POST">
+              <input type="hidden" name="userid" value="{{data.userid}}">
+              <table>
+              <tr>
+                <td style="text-align: right;"><span>Product:</span></td>
+                <td>{{ i.Product_Name }}</td>
+              </tr>
+              <tr>
+                <td style="text-align: right;"><span>Price:</span></td>
+                <td>{{ i.Price }}</td>
+              </tr>
+              
+              </table>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <input type="hidden" name="productname" value = "{{i.Product_Name}}">
+          <input type="hidden" name="price" value = "{{i.Price}}">
+          <button type="submit" class="btn btn-primary" name="check{{i.Product_Name}}">Checkout</button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>  
+  
+    </div>
+  </div>
+  
+  <br><br>
+
+
+{% endfor %}
+  
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="/docs/4.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+      
+{% endblock %}

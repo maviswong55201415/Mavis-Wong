@@ -1,0 +1,103 @@
+
+
+{% extends "base.html" %}
+
+{% block head %}
+<title>About us</title>
+<link href="{{ url_for("static", filename = "css/home.css")}}" rel="stylesheet">
+<link href="{{ url_for("static", filename = "css/login.css")}}" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block main %}
+
+{% include "flashsender.html" %}
+
+{% if session['username'] %}
+<h1>Welcome, {{ session['username'] }}</h1>
+{% else %}
+<p>Please Login</p>
+{% endif %}
+
+
+
+
+  
+
+  <div class="home">
+  <h1>User Name</h1>  
+  <h2>{{data.username}}</h2>
+  <br><br>
+  <h1>email</h1>
+  <h2>{{data.email}}</h2>
+  <br><br>
+  <h1>True Name</h1>
+  <h2>{{data.truename}}</h2>
+  <br><br>
+  <h1>Mobile Phone</h1>
+  <h2>{{data.mobile}}</h2>
+  <br><br>
+  <h1>Address</h1>
+  <h2>{{data.address}}</h2>
+  <br><br>
+
+  <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  want to change your information?
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Change information</h5>
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{url_for('change')}}" method="POST">
+        <input type="hidden" name="userid" value="{{data.userid}}">
+        <table>
+        <tr>
+            <td style="text-align: right;"><span>password</span></td>
+            <td>{{ form.password }}</td>
+        </tr>
+        <tr>
+            <td style="text-align: right;"><span>email</span></td>
+            <td>{{ form.email }}</td>
+        </tr>
+        <tr>
+            <td style="text-align: right;"><span>True Name</span></td>
+            <td>{{ form.truename }}</td>
+        </tr>
+        <tr>
+            <td style="text-align: right;"><span>Mobile phone</span></td>
+            <td>{{ form.mobile }}</td>
+        </tr>
+        <tr>
+            <td style="text-align: right;"><span>Address</span></td>
+            <td>{{ form.address }}</td>
+        </tr>
+        </table>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>  
+
+  </div>
+
+
+<!-- /.container -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="/docs/4.2/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="/docs/4.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP" crossorigin="anonymous">
+    </script>
+  
+{% endblock %}

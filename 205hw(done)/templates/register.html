@@ -1,0 +1,41 @@
+
+
+{% extends "base.html" %}
+
+{% block head %}
+<title>Register Form</title>
+<link href="{{ url_for("static", filename = "css/register.css")}}" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block main %}
+
+<body oncontextmenu="return false">
+	<div class="body"></div>
+	<div class="header">
+		<div>Pass<span>3</span></div>
+	</div>
+ <form action="/register" method="post" role="form">
+	{{ form.hidden_tag() }}
+	<div class="register">
+			<p style="color:aliceblue;">User name:</p>
+			{{ form.username }}<br><br>
+			<p style="color:aliceblue;">Password:</p>
+			{{ form.password }}<br>
+			<p style="color:aliceblue;">Email</p>
+			{{ form.email }}<br>
+			<p style="color:aliceblue;">True Name:</p>
+			{{ form.truename }}<br><br>
+			<p style="color:aliceblue;">Phone number:</p>
+			{{ form.mobile }}<br><br>
+			<p style="color:aliceblue;">Address:</p>
+			{{ form.address }}<br><br>
+			{{ form.recaptcha }}
+			<input type="submit" value="Register" class='registerbutton'> <br>
+			<h3 style='color:aliceblue; '><strong> {% include "flashsender.html" %} </strong></h3>
+		</div>
+	</form>
+</body>
+
+{% endblock %}

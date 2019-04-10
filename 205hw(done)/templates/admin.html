@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>User information</title>
+<link href="{{ url_for("static", filename = "css/admin.css")}}" rel="stylesheet">
+
+
+{% endblock %}
+
+
+{% block main %}
+
+
+{% include "flashsender.html" %}
+
+{% for i in data %}
+    <div class="card ">
+      <h1>{{i.username}}</h1>
+      <p>{{i.userid}}</p>
+      <p>{{i.password}}</p>
+      <p>{{i.email}}</p>
+      <p>{{i.truename}}</p>
+      <p>{{i.mobile}}</p>
+      <p>{{i.address}}</p>
+      {% set user = i.userid %}
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{i.username}}">
+        Purchase record
+      </button>
+
+      
+      <!-- Modal -->
+      <div class="modal fade" id="{{i.username}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Record</h5>
+            </div>
+            <div class="modal-body">
+              {% for x in data1 %}
+                {% if x.userid == user %}
+                  <table>
+                    <tr>
+                      <td style="text-align: right;"><span>Product name:</span></td>
+                      <td>{{ x.Product_Name }}</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: right;"><span>Price:</span></td>
+                      <td>{{ x.Price }}</td>
+                    </tr>
+                  </table>
+                {% endif %}  
+              {% endfor %}
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>  
+    </div>
+ 
+
+
+
+{% endfor %}
+
+<!-- /.container -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="/docs/4.2/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="/docs/4.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP" crossorigin="anonymous">
+</script>
+{% endblock %}

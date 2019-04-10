@@ -1,0 +1,34 @@
+
+
+{% extends "base.html" %}
+
+{% block head %}
+<title>login</title>
+<link href="{{ url_for("static", filename = "css/login.css")}}" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block main %}
+
+<body oncontextmenu="return false">
+	<div class="body"></div>
+	<div class="header">
+		<div>Pass<span>3</span></div>
+	</div>
+	<br>
+	<form action="/login" method="post" role="form">
+		{{ form.hidden_tag() }}
+		<div class="login">
+				<p style="color:aliceblue;">User name:</p>
+				{{ form.username }}<br>
+				<p style="color:aliceblue;">Password:</p>
+				{{ form.password }}<br><br>
+				{{ form.recaptcha }}<br>
+				<input type="submit" value="Login" class='loginbutton'> <br>
+				<h3 style='color:aliceblue; '><strong> {% include "flashsender.html" %} </strong></h3>
+		</div>
+	</form>
+</body>
+
+{% endblock %}

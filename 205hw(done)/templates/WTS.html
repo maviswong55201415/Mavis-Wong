@@ -1,0 +1,44 @@
+
+
+{% extends "base.html" %}
+
+{% block head %}
+<title>WTB</title>
+<link href="{{ url_for("static", filename = "css/home.css")}}" rel="stylesheet">
+<link href="{{ url_for("static", filename = "css/WTS.css")}}" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block main %}
+
+{% include "flashsender.html" %}
+
+{% if session['username'] %}
+<h1>Welcome, {{ session['username'] }}</h1>
+{% endif %}
+
+<body oncontextmenu="return false">
+	<div class="body"></div>
+	<div class="header">
+		<div>Pass<span>3</span></div>
+	</div>
+ <form action="/WTS" method="post" role="form">
+	{{ form.hidden_tag() }}
+	<div class="WTS">
+			<p style="color:aliceblue;">Product name:</p>
+			{{ form.productname }}<br><br>
+			<p style="color:aliceblue;">Price:</p>
+			{{ form.price }}<br>
+			<p style="color:aliceblue;">Description:</p>
+			{{ form.discription }}<br>
+			<p style="color:aliceblue;">Number of product:</p>
+			{{ form.nvmofgood }}<br><br>
+			{{ form.recaptcha }}
+			<input type="submit" value="Sale" class='WTSbutton'> <br>
+			<h3 style='color:aliceblue; '><strong> {% include "flashsender.html" %} </strong></h3>
+		</div>
+	</form>
+</body>
+
+{% endblock %}
